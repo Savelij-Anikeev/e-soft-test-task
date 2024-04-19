@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  database:
+    image: postgres:12
+    ports:
+    - "5432:5432"
+    environment:
+    - POSTGRES_DB=appdb
+    - POSTGRES_USER=user1234
+    - POSTGRES_PASSWORD=pass1234
+    volumes:
+      - database_data:/var/lib/postgresql/data
+
+  api:
+    container_name: api
+    build: .
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/usr/src/app
+    stdin_open: true
+    tty: true  
+    environment:
+      - PORT=5000
+      - PG_DB=appdb
+      - PG_USER=user1234
+      - PG_PASS=pass1234
+      - PG_HOST=database
+    restart: always
+    depends_on:
+      - database
+
+volumes:
+  database_data: {}
