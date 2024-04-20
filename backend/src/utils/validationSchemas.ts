@@ -105,7 +105,7 @@ export const TaskCreateValidationsSchema: Schema = {
     //         errorMessage: "expire date cannot be empty"
     //     }
     // },
-    responsible: {
+    responsibleId: {
         isString: {
             errorMessage: "responsible id should be string value"
         },

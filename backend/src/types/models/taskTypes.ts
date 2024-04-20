@@ -22,8 +22,8 @@ export type BaseTaskType = {
     expiresAt: Date
     priority: TaskPriority
     status: TaskStatus
-    author: User | string
-    responsible: User | string
+    creatorId: User | string
+    responsibleId: User | string
 }
 
 export type TaskCreateType = Omit<BaseTaskType, "id">

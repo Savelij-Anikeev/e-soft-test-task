@@ -3,34 +3,117 @@ import Task from "../models/Task";
 import APIError from "../exceptions/api-error";
 import { isRecordExists } from "../utils/helpers";
 
+import { Op } from "sequelize";
+
+
 class TaskService {
-    async add(data: BaseTaskType): Promise<BaseTaskType> {
+    async add(data: BaseTaskType) {
         data.status = TaskStatus.ToPerform;
-        const task: BaseTaskType = (await Task.create(data)) as BaseTaskType;
+        const task = (await Task.create({...data}));
 
         return task;
     }
-    async getList(): Promise<BaseTaskType[]> {
-        const tasks = await Task.findAll();
+    async getList(currentUserId: string, timeFilter: string | undefined = undefined, isGrouped: boolean = false) {
+        if (isGrouped) {
+            //  if groupByResponsible === true
+            const result: any[] = [];
 
-        return tasks as BaseTaskType[];
+            const relatedResponsibleIdList = await Task.findAll({
+                where: { creatorId: currentUserId },
+                attributes: ['responsibleId'],
+                group: ['responsibleId'],
+                raw: true,
+            });
+              
+            for (const { responsibleId } of relatedResponsibleIdList) {
+                const tasks = await Task.findAll({
+                    order: [['updatedAt', 'DESC']],
+                    where: { responsibleId },
+                });
+              
+                result.push({ responsibleId, tasks });
+            }
+
+            return result;
+
+        } else if (timeFilter) {
+            // if there are params
+            // configuratng constants
+            const day = new Date();
+            day.setHours(0, 0, 0, 0);
+            const tomorrow = new Date(day);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const week = new Date();
+            week.setDate(day.getDate() + 7);
+
+            let expiredOptions;
+
+            switch(timeFilter) {
+                case 'day':
+                    return await Task.findAll({
+                        order: [['updatedAt', 'DESC']],
+                        where: {
+                            responsibleId: currentUserId,
+                            expiresAt: {
+                                [Op.between]: [day, tomorrow],
+                            },}});
+                case 'week':
+                    return await Task.findAll({
+                        order: [['updatedAt', 'DESC']],
+                        where: {
+                            responsibleId: currentUserId,
+                            expiresAt: {
+                                [Op.between]: [day, week],
+                            },},});
+                case 'moreThanWeek':
+                    return await Task.findAll({
+                        order: [['updatedAt', 'DESC']],
+                        where: {
+                            responsibleId: currentUserId,
+                            expiresAt: {
+                                [Op.gt]: week,
+                          },},});
+                }
+        }
+        return await Task.findAll({ 
+            order: [['updatedAt', 'DESC']],
+            where: { 
+                [Op.or]: [
+                    { creatorId: currentUserId }, 
+                    { responsibleId: currentUserId }
+                ] 
+        }});
+
     }
     async getOne(id: string): Promise<BaseTaskType> {
             try {
                 const task = await Task.findOne({where: {id}});
-                return task as BaseTaskType;
+                if(!task){
+                    throw APIError.BadRequestError('invalid id');
+                }
+                return task as unknown as BaseTaskType;
+
 
             } catch {
                 throw APIError.NotFoundError(`invalid id`);
             }
     }
-    async patchOne(id: string, data: Partial<BaseTaskType>): Promise<BaseTaskType> {
+    async patchOne(id: string, data: Partial<BaseTaskType>, hasFullPermission: boolean = false): Promise<BaseTaskType> {
         try {
+            // checking if task relate to currnet user or it's subordinates
+            // if it doesnt user can only change status
+            if(!hasFullPermission) {
+                if (data.status) {
+                    data = {status: data.status};
+                } else {
+                    data = {};
+                }
+            }
             await Task.update({ ...data }, { where: { id } });
             const task = await Task.findOne({ where: { id } });
             await isRecordExists(task, id);
 
-            return task as BaseTaskType;
+            return task as unknown as BaseTaskType;
         } catch {
             throw APIError.NotFoundError(`not found`);
         }

@@ -1,6 +1,8 @@
-import { Table, Column, DataType, Model, ForeignKey, HasMany } from 'sequelize-typescript';
+import { Table, Column, DataType, Model, ForeignKey, HasMany, BelongsTo, HasOne, Sequelize} from 'sequelize-typescript';
 
 import User from './User';
+import { Optional } from 'sequelize';
+import { NonAttribute } from 'sequelize';
 
 @Table({timestamps: true, modelName: 'Task', tableName: 'tasks'})
 class Task extends Model {
@@ -41,10 +43,12 @@ class Task extends Model {
     declare status: string;
 
     @ForeignKey(() => User)
-    declare author: User;
+    @Column({ type: DataType.UUID })
+    declare creatorId: string;
 
     @ForeignKey(() => User)
-    declare responsible: User;
+    @Column({ type: DataType.UUID })
+    declare responsibleId: string;
 }
 
 export default Task;

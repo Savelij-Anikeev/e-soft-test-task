@@ -1,8 +1,9 @@
-import { Table, Column, DataType, Model, ForeignKey, HasMany, BeforeCreate } from 'sequelize-typescript';
+import { Table, Column, DataType, Model, ForeignKey, HasMany, BeforeCreate, BelongsToMany, BelongsTo, HasOne } from 'sequelize-typescript';
 
 import * as uuid from 'uuid';
 
 import Session from './Session';
+import Task from './Task';
 
 
 @Table({timestamps: true, modelName: 'User', tableName: 'users'})
@@ -44,14 +45,14 @@ class User extends Model {
     declare password: string;
 
     @ForeignKey(() => User)
+    @Column({type: DataType.UUID})
     declare supervisor: User;
 
     @HasMany(() => User)
-    declare subordinates: User[];
+    declare subordinates: User[]; 
 
     @HasMany(() => Session)
     declare sessions: Session[];
-
 }
 
 export default User;

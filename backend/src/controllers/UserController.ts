@@ -33,12 +33,13 @@ class UserController {
             const candidate = await UserService.getRawByLogin(login);
 
             // compare password. Throws error if passwords are not equal
-            compareHashedPasswords(password, candidate.password)
+            await compareHashedPasswords(password, candidate.password)
 
             // creating new session
             const session = await SessionService.create(candidate);
             
             // setting cookie to headers. It will be expired in 1 month
+            res.clearCookie('sessionId');
             res.cookie('sessionId', session.id, { maxAge: 1000 * 60 * 60 * 24 * 30 })
 
             res.send();
@@ -62,6 +63,36 @@ class UserController {
             const users: UserGetDTO[] = await UserService.getAll()
             return res.send(users);
         } catch(err) {
+            next(err);
+        }
+    }
+
+    async getSubordinates(req: Request, res: Response, next: NextFunction) {
+        try {
+            const user = await SessionService.verify(req.cookies["sessionId"]!);
+            const users = await User.findAll({ where: { supervisor: String(user) } });
+
+            res.send(users);
+        } catch (err) {
+            next(err);
+        }
+    }
+    async addSubordinates(req: Request, res: Response, next: NextFunction) {
+        try {
+            const user = await SessionService.verify(req.cookies["sessionId"]!);
+            const candidate = await UserService.updateOne(req.body.userId, { supervisor: user });
+
+            res.send(201).send(candidate);
+        } catch (err) {
+            next(err);
+        }
+    }
+    async removeSubordinates(req: Request, res: Response, next: NextFunction) {
+        try {
+            await UserService.updateOne(req.params.id, { supervisor: null });
+
+            res.send();
+        } catch (err) {
             next(err);
         }
     }

@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize-typescript";
+import { ForeignKey, Sequelize } from "sequelize-typescript";
 
 import User from "../models/User";
 import Task from "../models/Task";
@@ -14,6 +14,11 @@ const sequelize = new Sequelize(
         models: [__dirname + '/models']
     }
 )
-sequelize.addModels([User, Task, Session])
+
+sequelize.addModels([User, Task, Session]);
+
+Task.belongsTo(User, { as: 'creator', foreignKey: 'creatorId' });
+Task.belongsTo(User, { as: 'responsible', foreignKey: 'responsibleId' });
+
 
 export default sequelize;

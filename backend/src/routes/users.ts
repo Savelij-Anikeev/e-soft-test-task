@@ -28,4 +28,18 @@ router.get('/users/',
 router.get('/users/:id',
     (req: Request, res: Response, next: NextFunction) => UserController.getOne(req, res, next))
 
+
+// list all subordinates
+router.get('/subordinates/', authMiddleware, 
+    (req: Request, res: Response, next: NextFunction) => UserController.getSubordinates(req, res, next))
+
+// add user to suboridinate's list
+router.post('/subordinates/', authMiddleware, 
+    (req: Request, res: Response, next: NextFunction) => UserController.addSubordinates(req, res, next))
+
+// remove user to suboridinate's list
+router.delete('/subordinates/:id', authMiddleware, 
+    (req: Request, res: Response, next: NextFunction) => UserController.removeSubordinates(req, res, next))
+
+
 export default router;

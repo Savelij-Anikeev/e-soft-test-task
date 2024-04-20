@@ -13,19 +13,20 @@ class UserService {
 
         return new UserGetDTO(user);
     }
-    async getById(id: string): Promise<UserGetDTO> {
+    async getById(id: string): Promise<User> {
         try {
             const user = await User.findOne({where: {id}})
             await isRecordExists(user, id);
 
-            return new UserGetDTO(user!);
+            // return new UserGetDTO(user!);
+            return user!;
         } catch {
             throw APIError.BadRequestError('invalid id')
         }
 
     }
     async getAll(): Promise<UserGetDTO[]> {
-        const users = await User.findAll();
+        const users = (await User.findAll()).map(e => new UserGetDTO(e));
 
         return users;
     }
