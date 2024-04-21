@@ -4,10 +4,11 @@ import APIError from "../exceptions/api-error";
 import { UserGetType } from "../types/models/userTypes";
 import { BaseSessionType } from "../types/models/sessionTypes";
 
+
 class SessionService {
     async create(user: User): Promise<BaseSessionType> {
         // creating session
-        const session = await Session.create({owner: user.id});
+        const session = await Session.create({owner: user.id });
         
         return session;
     }

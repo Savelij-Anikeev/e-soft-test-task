@@ -7,7 +7,8 @@ import SessionService from "../services/SessionService";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const session = req.cookies["sessionId"];
+        // const session = req.cookies["sessionId"];
+        const session = req.headers.authorization;
         if(!session) {
             throw APIError.UnauthorizedError('you should be authorized');
         }

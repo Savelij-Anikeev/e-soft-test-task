@@ -1,0 +1,23 @@
+.wrap {
+    box-sizing: border-box;
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.logo {
+    height: 2rem;
+    margin-right: 0.5rem;
+}
+.logoText{
+    width: 70%;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+.logoText:hover {
+    text-decoration: none;
+    color: var(--btn-text-color);
+}

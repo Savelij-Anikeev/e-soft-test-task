@@ -1,0 +1,22 @@
+.sidebarWrapper{
+    overflow: hidden;
+    min-width: 200px;
+    max-width: 250px;
+    width: 20%;
+    min-height: 100%;
+    height: 100%;
+    background-color: var(--stroke-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebarInner {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-height: 100%;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+}

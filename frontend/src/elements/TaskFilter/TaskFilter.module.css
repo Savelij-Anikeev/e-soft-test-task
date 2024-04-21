@@ -1,0 +1,22 @@
+.taskFilter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 1rem;
+    background-color: var(--stroke-color);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.taskFilter:hover {
+    background-color: var(--text-color);
+    color: var(--stroke-color);
+}
+.taskFilter:not(:first-child) {
+    margin-left: 1rem;
+}
+
+.active {
+    background-color: var(--hover-color);
+    color: var(--btn-text-color);
+}

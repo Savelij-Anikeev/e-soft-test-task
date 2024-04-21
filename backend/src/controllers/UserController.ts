@@ -38,11 +38,7 @@ class UserController {
             // creating new session
             const session = await SessionService.create(candidate);
             
-            // setting cookie to headers. It will be expired in 1 month
-            res.clearCookie('sessionId');
-            res.cookie('sessionId', session.id, { maxAge: 1000 * 60 * 60 * 24 * 30 })
-
-            res.send();
+            res.send({...new UserGetDTO(candidate), sessionId: session.id});
 
         } catch(err) {
             next(err);

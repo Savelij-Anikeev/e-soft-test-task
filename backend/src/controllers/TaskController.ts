@@ -11,6 +11,9 @@ import APIError from "../exceptions/api-error";
 import UserService from "../services/UserService";
 
 
+import { BaseTaskType } from "../types/models/taskTypes";
+
+
 class TaskController {
     async create(req: Request, res: Response, next: NextFunction){
         try {
@@ -18,7 +21,7 @@ class TaskController {
             await checkValidationErrors(req);
             
             // making auth user be author by default
-            req.body.creatorId = String(await SessionService.verify(req.cookies["sessionId"]));
+            req.body.creatorId = String(await SessionService.verify(req.headers.authorization!));
 
             // creating task
             const task = await TaskService.add(req.body);
@@ -31,10 +34,11 @@ class TaskController {
     async getAll(req: Request, res: Response, next: NextFunction){
         try {
             // getting current user
-            const currentUserId = String(await SessionService.verify(req.cookies["sessionId"]));
-            const tasks = await TaskService.getList(currentUserId, String(req.query.time), Boolean(req.query.groupByResponsible));
+            const currentUserId = String(await SessionService.verify(req.headers.authorization!));
+            const tasks = (await TaskService.getList(currentUserId, String(req.query.time), Boolean(req.query.groupByResponsible)))
 
-            res.send(tasks);
+            
+            res.send(await this.replaceIdWithUser(tasks));
         } catch(err) {
             next(err);            
         }
@@ -49,7 +53,7 @@ class TaskController {
     }
     async patchOne(req: Request, res: Response, next: NextFunction){
         try {
-            const userId = String(await SessionService.verify(req.cookies["sessionId"]));
+            const userId = String(await SessionService.verify(req.headers.authorization!));
             const taskCandidate = await TaskService.getOne(req.params.id);
             let hasFullPermission = false;
             
@@ -70,7 +74,7 @@ class TaskController {
     }
     async deleteOne(req: Request, res: Response, next: NextFunction){
         try {
-            const userId = String(await SessionService.verify(req.cookies["sessionId"]));
+            const userId = String(await SessionService.verify(req.headers.authorization!));
             const taskCandidate = await TaskService.getOne(req.params.id);
             if (userId !== taskCandidate.creatorId) {
                 throw APIError.UnauthorizedError('not enough permission');
@@ -81,6 +85,16 @@ class TaskController {
         } catch(err) {
             next(err);
         }     
+    }
+
+    async replaceIdWithUser(arr: any): Promise<any> {
+        return await Promise.all(
+            arr.map(async (element: any) => {
+                element.responsibleId = await UserService.getById(element.responsibleId);
+                return element;
+            })
+        )
+
     }
 }
 

@@ -35,5 +35,5 @@ export const compareHashedPasswords = async (password: string, hashed: string): 
 }
 
 export const generateLogin = async (): Promise<string> => {
-        return '@user-' + String(uuid.v4()).slice(0, 16);
+        return '@user-' + String(uuid.v4()).slice(0, 8);
 }

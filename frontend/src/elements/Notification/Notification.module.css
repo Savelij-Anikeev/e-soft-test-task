@@ -1,0 +1,34 @@
+.notificationWrapper{
+    position: fixed;
+    width: 300px;
+    min-height: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-size: larger;
+    font-weight: 600;
+
+    background-color: var(--btn-color);
+
+    top: 100px;
+    animation: forwards normal ease notificationAppearing 0.5s;
+}
+.notification{
+    width: 90%;
+    height: 90%;
+    align-items: center;
+}
+
+@keyframes notificationAppearing {
+    0% {
+        right: -300px;
+        color: var(--btn-color);
+    }
+    100% {
+        right: 0;
+        color: var(--btn-text-color);
+    }
+}

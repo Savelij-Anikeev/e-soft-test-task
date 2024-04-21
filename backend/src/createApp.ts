@@ -10,6 +10,11 @@ export default (): Express => {
 
     const app = express();
     const API_PREFIX: string = '/api/v1/';
+    const corsOptions = { 
+        origin: 'http://localhost:3000', 
+        credentials: true,            //access-control-allow-credentials:true
+        optionSuccessStatus: 200,
+    }
 
     // making server trust to proxy
     app.set('trust proxy', true);
@@ -17,7 +22,7 @@ export default (): Express => {
     // middlewares
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    app.use(cors());
+    app.use(cors(corsOptions));
     app.use(cookieParser());
 
     // routes

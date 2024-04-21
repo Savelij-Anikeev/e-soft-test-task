@@ -1,0 +1,19 @@
+.input {
+    box-sizing: border-box;
+    height: 3rem;
+    width: 100%;
+    padding: 5px 15px;
+    font-weight: 600;
+    font-size: larger;
+    color: var(--btn-text-color);
+    background-color: var(--bg-color);
+    border: 5px solid var(--stroke-color);
+    margin-top: 1rem;
+    transition: all 0.2s;
+}
+.input:focus {
+    border: 5px solid var(--btn-color)
+}
+.error{
+    color: red;
+}
