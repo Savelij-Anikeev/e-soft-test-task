@@ -11,10 +11,10 @@ const LogoSidebar = () => {
   return (
     <div className={styles.wrap}>
         <Link to={routesConfig.home} className={styles.logoText}>
-            <img src={logo} alt="logo" className={styles.logo}/>
-            <h2>
+            <img src={logo} alt="logo" className={styles.logo} title='COSMOS TODO'/>
+            {/* <h2>
                 COSMOS
-            </h2>
+            </h2> */}
         </Link>
     </div>
   )

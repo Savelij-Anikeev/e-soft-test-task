@@ -1,0 +1,52 @@
+.taskGroupWrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.taskGroupInner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 940px;
+    overflow-y: scroll;
+    padding: 0 1rem 0 1rem;
+}
+
+.element{
+    display: flex;
+    flex-direction: column;
+}
+
+.elementHeader {
+    box-sizing: border-box;
+    height: 3rem;
+    width: 100%;
+    background-color: var(--btn-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    cursor: pointer;
+    font-weight: 400;
+    /* font-size: larger; */
+    color: var(--btn-text-color);
+}
+
+.elementBody {
+    margin-top: 1rem;
+    /* width: 100%; */
+    animation: normal forwards 0.3s appearTasks;
+    overflow-y: hidden;
+    transform-origin: top;
+}
+
+@keyframes appearTasks {
+    0% {
+        transform: scaleY(0);
+    } 
+    100% {
+        transform: scaleY(1);
+    }
+}

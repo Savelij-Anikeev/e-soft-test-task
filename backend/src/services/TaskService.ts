@@ -19,7 +19,7 @@ class TaskService {
             const result: any[] = [];
 
             const relatedResponsibleIdList = await Task.findAll({
-                where: { creatorId: currentUserId },
+                where: { creatorId: currentUserId, responsibleId: { [Op.not]: currentUserId } },
                 attributes: ['responsibleId'],
                 group: ['responsibleId'],
                 raw: true,
@@ -28,7 +28,7 @@ class TaskService {
             for (const { responsibleId } of relatedResponsibleIdList) {
                 const tasks = await Task.findAll({
                     order: [['updatedAt', 'DESC']],
-                    where: { responsibleId },
+                    where: { responsibleId, creatorId: currentUserId },
                 });
               
                 result.push({ responsibleId, tasks });
@@ -41,8 +41,8 @@ class TaskService {
             // configuratng constants
             const day = new Date();
             day.setHours(0, 0, 0, 0);
-            const tomorrow = new Date(day);
-            tomorrow.setDate(tomorrow.getDate() + 1);
+            const tomorrow = new Date();
+            tomorrow.setDate(day.getDate() + 1);
             const week = new Date();
             week.setDate(day.getDate() + 7);
 

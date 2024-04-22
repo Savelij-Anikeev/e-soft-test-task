@@ -1,8 +1,9 @@
 .sidebarWrapper{
     overflow: hidden;
-    min-width: 200px;
-    max-width: 250px;
-    width: 20%;
+    /* min-width: 200px;
+    max-width: 250px; */
+    width: 4rem;
+    min-width: 4rem;
     min-height: 100%;
     height: 100%;
     background-color: var(--stroke-color);
@@ -19,4 +20,21 @@
     padding: 1rem;
     width: 100%;
     height: 100%;
+}
+
+@media screen and (max-width: 1060px) {
+    .sidebarWrapper{
+        width: 100%;
+        max-width: 100%;
+        min-height: 0;
+        max-height: 4rem;
+    }
+    .sidebarInner {
+        width: 90%;
+        padding: 0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100%;
+    }
 }

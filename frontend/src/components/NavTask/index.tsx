@@ -5,12 +5,8 @@ import { taskTypeEnum } from '../../app/types/task';
 import styles from "./NavTask.module.css";
 
 import TaskFilter from '../../elements/TaskFilter';
+import TaskGroup from '../../elements/TaskGroup';
 
-
-// interface NavTaskProps {
-//   currentFilter: taskTypeEnum
-//   onClick: Function
-// }
 
 const NavTask: React.FC<any> = () => {
   const taskFilterList = [
@@ -24,12 +20,16 @@ const NavTask: React.FC<any> = () => {
     <nav className={styles.nav}>
         <h2 className={styles.headingText}>Задачи</h2>
         <div className={styles.taskFilters}>
-          { taskFilterList.map(e => (
-            <TaskFilter 
-            key={taskFilterList.indexOf(e)} 
-            label={e.label}
-            name={e.name as taskTypeEnum} />
-          )) }
+            { taskFilterList.map(e => (
+              <TaskFilter 
+              key={taskFilterList.indexOf(e)} 
+              label={e.label}
+              name={e.name as taskTypeEnum} />
+            )) }
+          <TaskGroup key="isGrouped"
+          label="по подчиненным"/>
+          {/* <Button value="по подчиненным" 
+          onClick={() => taskFilter.changeIsGrouped()}/> */}
         </div>
     </nav>
   )

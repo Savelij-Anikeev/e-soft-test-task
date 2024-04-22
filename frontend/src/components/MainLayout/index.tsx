@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styles from "./MainLayout.module.css";
 
@@ -8,10 +8,11 @@ import Sidebar from '../Sidebar';
 import TaskLayout from '../TaskLayout';
 import { useNavigate } from 'react-router-dom';
 import { routesConfig } from '../../app/config/routeConfig';
-
+import Modal from '../Modal';
 
 const MainLayout = () => { 
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     if (!user.data) {
@@ -19,11 +20,9 @@ const MainLayout = () => {
     }
   }, [])
 
-
-
-
   return (
     <div className={styles.wrapper}>
+        <Modal />
         <Sidebar />
         <TaskLayout />
     </div>

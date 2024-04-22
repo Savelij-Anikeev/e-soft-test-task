@@ -14,13 +14,19 @@ interface TaskFilterProps {
 
 
 const TaskFilter = observer((props: TaskFilterProps) => {        
-    const styleClasses = (taskFilter.filter === props.name) 
+    // checking if active
+    let styleClasses = (taskFilter.filter === props.name) 
     ? `${styles.taskFilter} ${styles.active}`
     : `${styles.taskFilter}`;
+
+    // checking if 'isGrouped' === true
+    let isCovered = taskFilter.isGrouped ? ` ${styles.covered}` : ``; 
+    styleClasses += isCovered;
+
     return (
         <span 
         className={styleClasses}
-        onClick={() => taskFilter.change(props.name)}>
+        onClick={!taskFilter.isGrouped ? () => taskFilter.changeFilter(props.name) : () => {}}>
             { props.label }
         </span>
   )

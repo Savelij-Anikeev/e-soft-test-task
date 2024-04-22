@@ -20,3 +20,6 @@
     background-color: var(--hover-color);
     color: var(--btn-text-color);
 }
+.covered {
+    opacity: 0.5;
+}

@@ -1,0 +1,19 @@
+.navActionsWrapper{
+    margin: 4rem 1.5rem 0 0;
+}
+.addBtn{
+    display: flex;
+    background-color: var(--tertlary-color);
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    padding: 0 1rem;
+    color: var(--stroke-color);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.addBtn:hover {
+    background-color: var(--stroke-color);
+    color: var(--tertlary-color);
+    box-shadow: 0px 0px 2px 2px var(--tertlary-color);
+}

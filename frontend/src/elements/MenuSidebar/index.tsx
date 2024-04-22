@@ -1,5 +1,8 @@
 import React from 'react'
 
+import subordinatesLogo from "../../shared/media/people-50.png";
+import exitLogo from "../../shared/media/logout-48.png";
+
 import { routesConfig } from '../../app/config/routeConfig';
 import { Link } from 'react-router-dom';
 
@@ -12,12 +15,22 @@ const MenuSidebar = () => {
           <li className={styles.menuPoint}>
               <Link to={routesConfig.subordinates}
               className={styles.menuLink}
-              >Подчиненные</Link>
+              >
+                <img src={subordinatesLogo} 
+                alt="Подчиненные" 
+                title="Подчиненные"
+                className={styles.logo}/>
+              </Link>
           </li>
           <li className={styles.menuPoint}>
               <Link to={routesConfig.subordinates}
               className={styles.menuLink}
-              >Выйти</Link>
+              >
+                <img src={exitLogo} 
+                alt="Выход" 
+                title="Выход"
+                className={styles.logo}/>
+              </Link>
           </li>
       </ul>
   )

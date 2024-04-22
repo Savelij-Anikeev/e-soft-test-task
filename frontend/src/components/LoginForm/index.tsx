@@ -19,8 +19,7 @@ const LoginForm = () => {
   const [ apiError, setApiError ] = useState<string>('');
 
   const onSubmit = async (data: any) => {
-    const result = await Login(data);
-    
+    const result = await Login(data);    
     if (result.status) {
       navigate(routesConfig.home);
     }

@@ -2,12 +2,14 @@ import React, { useEffect } from 'react'
 import { observer } from 'mobx-react-lite';
 
 import styles from "./Task.module.css";
-import { TaskType } from '../../app/types/task';
+import { TaskType, taskStatusEnum } from '../../app/types/task';
 
 import { getNormalTime } from '../../shared/utils';
 
-interface TaskProps extends TaskType {
+import modal from '../../app/store/modal';
 
+
+interface TaskProps extends TaskType {
 }
 
 
@@ -15,13 +17,15 @@ const Task: React.FC<TaskProps> = observer((props) => {
     const nowDate = new Date(Date.now());
     const expiredDate = new Date(props.expiresAt);
     const isExpired = nowDate > expiredDate
-    const classes = isExpired ? `` : ``;
+    
+    const headerClasses = (isExpired && String(props.status) !== 'выполнена') 
+        ? `${styles.error}` : (String(props.status) === 'выполнена') ? `${styles.success}` : ``;        
 
     return (
-        <div className={styles.taskWrapper}>
+        <div className={styles.taskWrapper} onClick={() => modal.switchOpen(props.id)}>
             <p className={styles.point}>
                 <span className={styles.key}>имя:</span> 
-                <span className={styles.value}>{props.header}</span>
+                <span className={`${styles.value} ${headerClasses}`}>{props.header}</span>
             </p>
             <p className={styles.point}>
                 <span className={styles.key}>приоритет:</span> 

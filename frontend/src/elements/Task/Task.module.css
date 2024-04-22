@@ -58,3 +58,19 @@
 .lastPoint {
     text-wrap: nowrap;
 }
+
+.error {
+    color: var(--error-color);
+}
+
+.success {
+    color: var(--tertlary-color);
+}
+
+@media screen and (max-width: 1000) {
+    .taskWrapper {
+        width: 600px;
+        max-width: 100%;
+        min-width: 0;
+    }
+}

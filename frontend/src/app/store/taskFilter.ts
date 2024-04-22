@@ -6,13 +6,17 @@ import { getTasks } from "../api/task-api";
 
 class TaskFilter {
     filter: taskTypeEnum = "ALL"  as taskTypeEnum;
-    
+    isGrouped: boolean = false;
+
     constructor() {
         makeAutoObservable(this);
     }
 
-    change(value: taskTypeEnum) {        
+    changeFilter(value: taskTypeEnum) {        
         this.filter = value;
+    }
+    changeIsGrouped() {
+        this.isGrouped = !this.isGrouped;
     }
 }
 

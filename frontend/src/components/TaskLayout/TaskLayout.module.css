@@ -5,3 +5,22 @@
     flex-direction: column;
     background-color: var(--bg-color);
 }
+.navWrapper{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    justify-content: space-between;
+    width: 972px;
+}
+
+@media screen and (max-width: 1000) {
+    .taskLayoutWrapper {
+        width: 100%;
+        flex-grow: 0;
+        
+    }
+    .navWrapper {
+        width: 100%;
+    }
+    
+}

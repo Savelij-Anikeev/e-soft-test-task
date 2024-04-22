@@ -65,7 +65,7 @@ class UserController {
 
     async getSubordinates(req: Request, res: Response, next: NextFunction) {
         try {
-            const user = await SessionService.verify(req.cookies["sessionId"]!);
+            const user = await SessionService.verify(req.headers.authorization!);
             const users = await User.findAll({ where: { supervisor: String(user) } });
 
             res.send(users);
@@ -75,7 +75,7 @@ class UserController {
     }
     async addSubordinates(req: Request, res: Response, next: NextFunction) {
         try {
-            const user = await SessionService.verify(req.cookies["sessionId"]!);
+            const user = await SessionService.verify(req.headers.authorization!);
             const candidate = await UserService.updateOne(req.body.userId, { supervisor: user });
 
             res.send(201).send(candidate);

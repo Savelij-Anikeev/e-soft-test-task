@@ -1,0 +1,46 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 5px;
+    font-size: larger;
+    font-weight: 500;
+}
+.formInputs{
+    display: flex;
+    flex-direction: column;
+}
+.label {
+    min-height: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.label:not(:first-child) {
+    margin-top: 2rem;
+}
+
+.baseInput {
+    background-color: var(--bg-color);
+    border: none;
+    color: var(--btn-text-color);
+    border-bottom: 2px solid var(--secondary-color);
+    transition: all 0.2s;
+    color-scheme: dark;
+}
+
+.input {
+    height: 2rem;
+}
+.input:focus {
+    border-bottom: 2px solid var(--btn-text-color);
+}
+.textarea {
+    min-height: 2rem;
+    max-height: 7rem;
+    resize:vertical;
+}
+.select {
+    height: 2rem;
+}

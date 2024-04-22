@@ -5,6 +5,7 @@ import { UserType } from "../types/user";
 
 class User {
     data: UserType | undefined;
+    subordinates: UserType[] = [];
 
     constructor() {
         makeAutoObservable(this);
@@ -22,6 +23,11 @@ class User {
     setData(data: UserType) {
         this.data = data;
         this.addShortName();
+    }
+
+    setSubordinates(data: UserType[]) {
+        this.subordinates = [];
+        this.subordinates = data;
     }
 
 }
