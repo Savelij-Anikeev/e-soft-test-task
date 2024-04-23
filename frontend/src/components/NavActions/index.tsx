@@ -10,7 +10,7 @@ const NavActions = () => {
     <div className={styles.navActionsWrapper}>
         <span 
         className={styles.addBtn}
-        onClick={() => modal.switchOpen('create')}>Добавить новую задачу</span>
+        onClick={() => modal.switchOpen('create')}>Добавить задачу</span>
     </div>
   )
 }

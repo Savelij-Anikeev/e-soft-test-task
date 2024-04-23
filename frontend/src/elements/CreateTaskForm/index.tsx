@@ -77,7 +77,7 @@ const CreateTaskForm = observer(() => {
               className={`${styles.select} ${styles.baseInput}`}
               {...register('responsibleId')}>
                 {responsibleCandidates.map(e => (
-                  <option key={e.id} value={e.id}>{e.secondName} {e.secondName}</option>
+                  <option key={e.id} value={e.id}>{e.secondName} {e.firstName}</option>
                 ))}
               </select>
             </label>

@@ -1,5 +1,6 @@
 .navActionsWrapper{
-    margin: 4rem 1.5rem 0 0;
+    margin: 4rem 0 0 0;
+
 }
 .addBtn{
     display: flex;
@@ -8,6 +9,8 @@
     justify-content: center;
     height: 3rem;
     padding: 0 1rem;
+    margin-top: 1rem;
+    text-wrap: nowrap;
     color: var(--stroke-color);
     cursor: pointer;
     transition: all 0.2s;
@@ -16,4 +19,15 @@
     background-color: var(--stroke-color);
     color: var(--tertlary-color);
     box-shadow: 0px 0px 2px 2px var(--tertlary-color);
+}
+
+@media screen and (max-width: 1000px) {
+    .navActionsWrapper {
+        padding: 0;
+        margin: 0 1rem 1rem 0;
+
+    }
+    .addBtn {
+        margin-left: 1rem;
+    }
 }

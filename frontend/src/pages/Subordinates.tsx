@@ -1,8 +1,20 @@
-import React from 'react'
+import React from 'react';
+
+import { Link } from 'react-router-dom';
+import { routesConfig } from '../app/config/routeConfig';
+
 
 const Subordinates = () => {
   return (
-    <div>Subordinates</div>
+    <div style={{margin: '3rem 1rem'}}>
+      <h1>*Страница для управления подчиненными*</h1>
+      <div>
+        Здесь можно будут реализованы функции добавления/удаления подчиненных.
+      </div>
+      <Link to={routesConfig.home}>
+        вернуться на главную страницу
+      </Link>
+    </div>
   )
 }
 

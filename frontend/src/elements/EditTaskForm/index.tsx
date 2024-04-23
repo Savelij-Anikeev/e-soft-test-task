@@ -86,7 +86,7 @@ const EditTaskForm = observer((props: EditTaskForm) => {
               ?<>
               <input type="datetime-local"
               className={`${styles.input} ${styles.baseInput}`}
-              defaultValue={new Date(currenTaskData.expiresAt).toLocaleDateString()}
+              defaultValue={(new Date(currenTaskData.expiresAt).toISOString()).split('.')[0]}
               {...register('expiresAt', 
               {required: 'Дедлайн должен быть указан'})}/>
               {errors?.expiresAt && <p>{String(errors?.expiresAt?.message)}</p>}
@@ -120,7 +120,7 @@ const EditTaskForm = observer((props: EditTaskForm) => {
               defaultValue={currenTaskData.responsibleId.id}
               {...register('responsibleId')}>
                 {responsibleCandidates.map(e => (
-                  <option key={e.id} value={e.id}>{e.secondName} {e.secondName}</option>
+                  <option key={e.id} value={e.id}>{e.secondName} {e.firstName}</option>
                 ))}
               </select>
               </> 

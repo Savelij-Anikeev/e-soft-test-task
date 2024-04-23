@@ -29,12 +29,13 @@
     height: 2rem;
 }
 
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1000px) {
     .menuWrapper{
         flex-direction: row;
         margin: 0;
         padding: 0;
-        max-width: 20%;
+        
+        max-width: 100px;
         margin-left: 8rem;
     }
     .menuPoint{

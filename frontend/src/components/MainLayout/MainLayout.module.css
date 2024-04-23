@@ -5,8 +5,10 @@
     align-items: center;
 }
 
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1000px) {
     .wrapper{
         flex-direction: column;
+        height: 100%;
+        width: 100%;
     }
 }

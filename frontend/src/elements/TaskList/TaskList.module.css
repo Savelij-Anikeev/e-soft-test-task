@@ -5,20 +5,21 @@
     overflow: hidden;
 }
 .tasksInner{
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 940px;
+    width: 100%;
+    max-width: 925px;
     overflow-y: scroll;
-    padding: 0 1rem 0 1rem;
+    padding: 0 1rem;
 }
 
-@media screen and (max-width: 1180px) {
+@media screen and (max-width: 1000px) {
     .tasksWrapper {
         width: 100%;
-        justify-content: center;
     }
     .tasksInner {
-        width: 90%;
+        width: 100%;
     } 
 }

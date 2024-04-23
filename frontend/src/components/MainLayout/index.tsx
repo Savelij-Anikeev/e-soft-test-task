@@ -10,12 +10,13 @@ import { useNavigate } from 'react-router-dom';
 import { routesConfig } from '../../app/config/routeConfig';
 import Modal from '../Modal';
 
+
 const MainLayout = () => { 
   const navigate = useNavigate();
   
 
   useEffect(() => {
-    if (!user.data) {
+    if (!user.data || !localStorage.getItem('token')) {
       navigate(routesConfig.login);
     }
   }, [])

@@ -2,12 +2,13 @@
     display: flex;
     flex-direction: column;
     /* background-color: red; */
-    /* width: 100%;    */
+    width: 100%;
     height: fit-content;
-    padding: 1rem;
+    /* padding: 1rem; */
 }
 .headingText{
     height: 3rem;
+    padding: 1rem 1rem 0 1rem;
     display: flex;
     align-items: center;
 
@@ -16,6 +17,7 @@
     margin-top: 1rem;
     display: flex;
     align-items: flex-end;
+    flex-wrap: wrap;
     width: 100%;
     height: 3rem;
 }
@@ -33,12 +35,20 @@
     margin-left: 2rem;
 }
 
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1000px) {
+    .nav {
+        width: 100%;
+        box-sizing: border-box;
+    }
     .taskFilters {
         width: 100%;
         height: fit-content;
         flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
         flex-direction: row;
+    }
+    .taskFilters:first-child {
     }
     
 }

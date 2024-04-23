@@ -5,6 +5,8 @@
     align-items: center;
     justify-content: center;
     margin-left: 1rem;
+    margin-bottom: 1rem;
+
 
     color: var(--text-color);
     box-shadow: 0 0 1px 1px var(--text-color);
@@ -21,4 +23,8 @@
 }
 .active:hover {
     background-color: var(--stroke-color);
+}
+
+@media screen and (max-width: 1000px) {
+
 }
