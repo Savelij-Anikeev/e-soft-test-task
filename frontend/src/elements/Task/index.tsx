@@ -16,6 +16,8 @@ interface TaskProps extends TaskType {
 const Task: React.FC<TaskProps> = observer((props) => {
     const nowDate = new Date(Date.now());
     const expiredDate = new Date(props.expiresAt);
+    nowDate.setHours(0, 0, 0, 0);
+    
     const isExpired = nowDate > expiredDate
     
     const headerClasses = (isExpired && String(props.status) !== 'выполнена') 

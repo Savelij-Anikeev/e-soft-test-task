@@ -32,6 +32,7 @@ const EditTaskForm = observer((props: EditTaskForm) => {
     const currenTaskData: TaskType = task.list.find(e => e.id === props.taskId)!;
     const hasFullPermission: boolean = currenTaskData.creatorId === user.data?.id;
 
+    // const defaultDate = (new Date(currenTaskData.expiresAt).toISOString()).split('.')[0]
     let responsibleCandidates = [user.data!].concat(user.subordinates);
     
     async function onSubmit(data: any) {
@@ -84,9 +85,9 @@ const EditTaskForm = observer((props: EditTaskForm) => {
               Дедлайн:
               {hasFullPermission
               ?<>
-              <input type="datetime-local"
+              <input type="date"
               className={`${styles.input} ${styles.baseInput}`}
-              defaultValue={(new Date(currenTaskData.expiresAt).toISOString()).split('.')[0]}
+              defaultValue={new Date(currenTaskData.expiresAt).toISOString().split('T')[0]}
               {...register('expiresAt', 
               {required: 'Дедлайн должен быть указан'})}/>
               {errors?.expiresAt && <p>{String(errors?.expiresAt?.message)}</p>}

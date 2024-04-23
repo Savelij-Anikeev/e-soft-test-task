@@ -53,7 +53,7 @@ const CreateTaskForm = observer(() => {
 
             <label className={styles.label}>
               Дедлайн:
-              <input type="datetime-local"
+              <input type="date"
               className={`${styles.input} ${styles.baseInput}`}
               {...register('expiresAt', 
               {required: 'Дедлайн должен быть указан'})}/>
