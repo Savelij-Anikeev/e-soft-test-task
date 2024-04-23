@@ -4,7 +4,7 @@ import { UserType } from "../types/user";
 
 
 class User {
-    data: UserType | undefined;
+    data: UserType | undefined = this.getInitData();
     subordinates: UserType[] = [];
 
     constructor() {
@@ -20,14 +20,24 @@ class User {
         }
     }
 
-    setData(data: UserType) {
+    setData(data: UserType | undefined) {
         this.data = data;
         this.addShortName();
+        localStorage.setItem('userData', JSON.stringify(data));
     }
 
     setSubordinates(data: UserType[]) {
         this.subordinates = [];
         this.subordinates = data;
+    }
+
+    getInitData() {
+        const data = localStorage.getItem('userData');
+        try {
+            return JSON.parse(data!);
+        }  catch {
+            return undefined;
+        } 
     }
 
 }

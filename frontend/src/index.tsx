@@ -16,7 +16,6 @@ axios.interceptors.request.use((request) => {
   return request;
 })
 
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
